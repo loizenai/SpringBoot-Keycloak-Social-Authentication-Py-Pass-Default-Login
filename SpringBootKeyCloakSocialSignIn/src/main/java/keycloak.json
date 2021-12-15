@@ -1,0 +1,10 @@
+{
+  "realm": "demo",
+  "auth-server-url": "https://dev-keycloak-service-v1.k8s.propzy.asia/auth/",
+  "ssl-required": "none",
+  "resource": "test001",
+  "credentials": {
+    "secret": "4ee6a7a4-9a5e-4ac3-9d7e-ecf41c6c7ee2"
+  },
+  "confidential-port": 0
+}

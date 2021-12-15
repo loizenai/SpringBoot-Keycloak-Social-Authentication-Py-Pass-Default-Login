@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Home page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="keycloak.js"></script>
+</head>
+<body>
+    <!-- your page content goes here -->
+    ok - testing    
+ 	<button onclick="myFunction()">Click me</button>          
+ 	<button onclick="showToken()">Show Token</button>
+</body>
+
+<script>
+	var keycloak = Keycloak({
+	     url: 'https://dev-keycloak-service-v1.k8s.propzy.asia/auth/',
+	     realm: 'demo',
+	     clientId: 'test001'
+	 });
+	 
+   function myFunction() {
+ 	  let kcLogin = keycloak.login;
+ 	  
+ 	  keycloak.login = (options) => {
+ 	    options.idpHint = 'facebook';
+ 	    kcLogin(options).then(auth => {
+ 	    	alert("keycloak Login");
+ 	        if(auth) {
+ 	           alert("token" + kc.token);
+ 	        } else {
+ 	        	alert("auth is null");
+ 	        }
+ 	    });
+ 	  };
+ 	  
+ 	  keycloak.init({ onLoad: 'login-required' }).then(function(authenticated) {
+          alert(authenticated ? 'authenticated' : 'not authenticated');
+      }).catch(function() {
+          alert('failed to initialize');
+      });
+	} 	
+   
+   function showToken() {
+	   alert("Show keycloak.subject = " + keycloak.subject);
+	   alert('keycloak.token = ' + keycloak.token);
+   }
+</script>
+
+</html>
